@@ -1,5 +1,8 @@
 ﻿namespace MemoryCards;
 
+using MemoryCards.Views;
+using Microsoft.Extensions.Logging;
+
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
@@ -13,6 +16,14 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+#if DEBUG
+		builder.Services.AddLogging(logging => 
+		{
+			logging.AddDebug();
+		});
+#endif
+		builder.Services.AddSingleton<MainPage>();
+
+        return builder.Build();
 	}
 }
