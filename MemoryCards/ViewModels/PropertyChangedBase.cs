@@ -2,15 +2,11 @@
 
 namespace MemoryCards.ViewModels
 {
-    public partial class BaseViewModel:ObservableObject
+    public partial class PropertyChangedBase:ObservableObject
     {
-        public BaseViewModel()
+        public PropertyChangedBase()
         {
 
-        }
-        [ObservableProperty]
-        string _title;
-        [ObservableProperty]
-        string _isBusy;
+        }        
     }
 }

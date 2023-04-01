@@ -2,31 +2,37 @@
   {
     "Name": "Lesbi",
     "Description": "Лесбиянки",
-    "Picture": "lesbi.png"
+    "Picture": "lesbi.png",
+    "State": 0
   },
   {
     "Name": "Atlet",
     "Description": "Сильный мужик",
-    "Picture": "atlet.png"
+    "Picture": "atlet.png",
+    "State": 0
   },
   {
     "Name": "Clown",
     "Description": "This is a clown",
-    "Picture": "atlet.png"
+    "Picture": "atlet.png",
+    "State": 0
   },
   {
     "Name": "Blind woman",
     "Description": "Blind folded girl",
-    "Picture": "blind_folded_girl.png"
+    "Picture": "blind_folded_girl.png",
+    "State": 0
   },
   {
     "Name": "Hand eye",
     "Description": "Hand eye",
-    "Picture": "hand_eye.png"
+    "Picture": "hand_eye.png",
+    "State": 0
   },
   {
     "Name": "Tricker",
     "Description": "Tricker",
-    "Picture": "tricker.png"
+    "Picture": "tricker.png",
+    "State": 0
   }
 ]
