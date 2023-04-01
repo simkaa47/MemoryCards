@@ -1,5 +1,7 @@
 ﻿namespace MemoryCards;
 
+using MemoryCards.Services;
+using MemoryCards.ViewModels;
 using MemoryCards.Views;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +25,8 @@ public static class MauiProgram
 		});
 #endif
 		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddSingleton<GetCardsService>();
+		builder.Services.AddSingleton<GameViewModel>();
 
         return builder.Build();
 	}

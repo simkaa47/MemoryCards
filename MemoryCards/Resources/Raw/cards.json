@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Lesbi",
+    "Description": "Лесбиянки",
+    "Picture": "lesbi.png"
+  },
+  {
+    "Name": "Atlet",
+    "Description": "Сильный мужик",
+    "Picture": "atlet.png"
+  },
+  {
+    "Name": "Clown",
+    "Description": "This is a clown",
+    "Picture": "atlet.png"
+  },
+  {
+    "Name": "Blind woman",
+    "Description": "Blind folded girl",
+    "Picture": "blind_folded_girl.png"
+  },
+  {
+    "Name": "Hand eye",
+    "Description": "Hand eye",
+    "Picture": "hand_eye.png"
+  },
+  {
+    "Name": "Tricker",
+    "Description": "Tricker",
+    "Picture": "tricker.png"
+  }
+]
