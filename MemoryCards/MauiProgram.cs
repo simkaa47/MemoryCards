@@ -26,6 +26,7 @@ public static class MauiProgram
 #endif
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<GetCardsService>();
+		builder.Services.AddSingleton<GameService>();
 		builder.Services.AddSingleton<GameViewModel>();
 
         return builder.Build();
