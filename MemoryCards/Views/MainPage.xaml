@@ -59,7 +59,7 @@
                             <Image Margin="2" Aspect="Fill">
 
                             </Image>
-                            <Label Text="{Binding Name}"/>
+                            <!--<Label Text="{Binding Name}"/>-->
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
