@@ -11,13 +11,16 @@ namespace MemoryCards.ViewModels
     public partial class GameViewModel:PropertyChangedBase
     {
         GetCardsService _getCardsService;
-        
-        public ObservableCollection<MemoryCard> GameCards { get; } = new();
+        GameService _gameService;
+
+        [ObservableProperty]
+        public List<MemoryCard> _gameCards;
 
 
-        public GameViewModel(GetCardsService getCardsService)
+        public GameViewModel(GetCardsService getCardsService , GameService gameService)
         {
             _getCardsService = getCardsService;
+            _gameService = gameService;
         }
         [ObservableProperty]
         MemoryCard _selectedCard;
@@ -29,18 +32,12 @@ namespace MemoryCards.ViewModels
             try
             {
                 var cards = await _getCardsService.GetCards();
-
-                if(GameCards.Count!=0)
-                    GameCards.Clear();
-
+                                
                 var mixed = cards.SelectMany(c => Enumerable.Range(0, 2).Select(i => c.Clone() as MemoryCard))
                     .ToList();
                 Mix(mixed);
 
-                foreach (var card in mixed)
-                {
-                    GameCards.Add(card);
-                }
+                GameCards = mixed;
 
             }
             catch (Exception ex)
@@ -56,11 +53,7 @@ namespace MemoryCards.ViewModels
         [RelayCommand]
         public async Task OnSelectCard()
         {
-            if (SelectedCard is null) return;
-            if (SelectedCard.State == CardState.Closed)
-                SelectedCard.State = CardState.Opened;
-            else
-                SelectedCard.State = CardState.Closed;
+           await _gameService.OnChangeSelectionCard(GameCards, SelectedCard);
             
 
         }

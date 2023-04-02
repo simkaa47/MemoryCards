@@ -32,17 +32,18 @@
             <CollectionView ItemsSource="{Binding GameCards}"
                             Grid.Row="1"
                             SelectionMode="Single" 
-                            SelectedItem="{Binding SelectedCard}"
-                            HorizontalOptions="Center"                            
                             SelectionChangedCommand="{Binding SelectCardCommand}"
+                            SelectedItem="{Binding SelectedCard}"
+                            HorizontalOptions="Center"
                             VerticalOptions="Center"
                             Grid.Column="1"
                         ItemsLayout="VerticalGrid, 3">
                 <CollectionView.Resources>
-                    <Style TargetType="Image">
-                        <Setter Property="Source" Value="closed_chest.png"/>
-                        
+                    <Style TargetType="Image"> 
                         <Style.Triggers>
+                            <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.Closed}">
+                                <Setter Property="Source" Value="closed_chest.png"/>
+                            </DataTrigger>
                             <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.Opened}">
                                 <Setter Property="Source" Value="{Binding Picture}"/>
                             </DataTrigger>
@@ -53,15 +54,13 @@
                     </Style>
                 </CollectionView.Resources>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="m:MemoryCard">
                         <Grid>
                             <Image Margin="2" Aspect="Fill">
 
                             </Image>
-                            
+                            <Label Text="{Binding Name}"/>
                         </Grid>
-                        
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -73,6 +72,7 @@
         <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
             <Button Command="{Binding GetCardsCommand}"
                     Background="TRansparent"/>
+            
         </Grid>        
         <!--#endregion-->
     </Grid>
