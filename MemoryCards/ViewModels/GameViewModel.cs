@@ -57,7 +57,7 @@ namespace MemoryCards.ViewModels
         public async Task OnSelectCard()
         {
             if (SelectedCard is null) return;
-            if (SelectedCard.State == CardState.Opened || SelectedCard.State == CardState.WaitForPair)return;
+            if (SelectedCard.State == CardState.Closed)
                 SelectedCard.State = CardState.Opened;
             else
                 SelectedCard.State = CardState.Closed;
