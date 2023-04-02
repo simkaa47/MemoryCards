@@ -8,6 +8,23 @@
              x:DataType="vm:GameViewModel"
              Title="MainPage">
     <Grid RowDefinitions="*,0.16*">
+        <Grid.Resources>
+            <Style TargetType="Grid">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </Grid.Resources>
         <!--#region Chests -->
         <Grid RowDefinitions="0.3*,*"
               ColumnDefinitions="*,8*,*">
@@ -16,7 +33,7 @@
                             Grid.Row="1"
                             SelectionMode="Single" 
                             SelectedItem="{Binding SelectedCard}"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="Center"                            
                             SelectionChangedCommand="{Binding SelectCardCommand}"
                             VerticalOptions="Center"
                             Grid.Column="1"
@@ -41,7 +58,7 @@
                             <Image Margin="2" Aspect="Fill">
 
                             </Image>
-                            <!--<Button Command="{Binding Source={RelativeSource AncestorType=ContentPage}, Path=BindingContext.SelectCardCommand}" Background="Transparent"/>-->
+                            
                         </Grid>
                         
 
