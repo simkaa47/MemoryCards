@@ -30,6 +30,8 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -49,7 +51,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Raw\cards.json" />
+		<None Remove="Resources\Images\atlet.png" />
+		<None Remove="Resources\Images\blind_folded_girl.png" />
+		<None Remove="Resources\Images\closed_chest.png" />
+		<None Remove="Resources\Images\clown.png" />
+		<None Remove="Resources\Images\hand_eye.png" />
+		<None Remove="Resources\Images\lesbi.png" />
+		<None Remove="Resources\Images\main_background.png" />
+		<None Remove="Resources\Images\tricker.png" />
+		<None Remove="Resources\Raw\cards.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -63,5 +73,5 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-
+	
 </Project>

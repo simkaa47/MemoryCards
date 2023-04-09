@@ -51,9 +51,10 @@ namespace MemoryCards.ViewModels
             }
         }
         [RelayCommand]
-        public async Task OnSelectCard()
+        public async Task OnSelectCard(object card)
         {
-           await _gameService.OnChangeSelectionCard(GameCards, SelectedCard);
+            if (!(card is MemoryCard selectedCard)) return;
+            await _gameService.OnChangeSelectionCard(GameCards, selectedCard);
             
 
         }

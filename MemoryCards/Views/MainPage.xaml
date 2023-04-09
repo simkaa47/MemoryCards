@@ -25,16 +25,18 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        <!--#region Chests -->
+        <!--#region Selected chest -->
+        <Label TextColor="White" Text="{Binding SelectedCard.Name}" FontSize="20"/>
+        <!--#endregion-->
+        <!--region Chests--> 
         <Grid RowDefinitions="0.3*,*"
               ColumnDefinitions="*,8*,*">
            
             <CollectionView ItemsSource="{Binding GameCards}"
                             Grid.Row="1"
                             SelectionMode="Single" 
-                            SelectionChangedCommand="{Binding SelectCardCommand}"
-                            SelectedItem="{Binding SelectedCard}"
                             HorizontalOptions="Center"
+                            
                             VerticalOptions="Center"
                             Grid.Column="1"
                         ItemsLayout="VerticalGrid, 3">
@@ -56,9 +58,13 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:MemoryCard">
                         <Grid>
-                            <Image Margin="2" Aspect="Fill">
+                            
+                            <Image Margin="2" Aspect="Fill" >
 
                             </Image>
+                            <Button Background="TRansparent"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameViewModel}}, Path=SelectCardCommand}"
+                                    CommandParameter="{Binding}"/>
                             <!--<Label Text="{Binding Name}"/>-->
                         </Grid>
                     </DataTemplate>
@@ -67,15 +73,14 @@
         </Grid>
         
 
-        <!--#endregion-->
-        <!--#region Buttons Panel -->
+        <!--endregion-->
+        <!--region Buttons Panel-->
         <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
             <Button Command="{Binding GetCardsCommand}"
                     Background="TRansparent"/>
             
         </Grid>        
-        <!--#endregion-->
+        <!--endregion-->
     </Grid>
-    
 
 </ContentPage>
