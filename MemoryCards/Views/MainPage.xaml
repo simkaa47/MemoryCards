@@ -24,19 +24,17 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-        </Grid.Resources>
-        <!--#region Selected chest -->
-        <Label TextColor="White" Text="{Binding SelectedCard.Name}" FontSize="20"/>
-        <!--#endregion-->
+        </Grid.Resources>        
         <!--region Chests--> 
         <Grid RowDefinitions="0.3*,*"
               ColumnDefinitions="*,8*,*">
-           
-            <CollectionView ItemsSource="{Binding GameCards}"
+
+            
+
+            <CollectionView ItemsSource="{Binding GameInfo.GameCards}"
                             Grid.Row="1"
                             SelectionMode="Single" 
-                            HorizontalOptions="Center"
-                            
+                            HorizontalOptions="Center"                            
                             VerticalOptions="Center"
                             Grid.Column="1"
                         ItemsLayout="VerticalGrid, 3">
@@ -57,8 +55,7 @@
                 </CollectionView.Resources>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:MemoryCard">
-                        <Grid>
-                            
+                        <Grid>                            
                             <Image Margin="2" Aspect="Fill" >
 
                             </Image>
@@ -76,9 +73,9 @@
         <!--endregion-->
         <!--region Buttons Panel-->
         <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
-            <Button Command="{Binding GetCardsCommand}"
+            <Button Command="{Binding StartNewGameCommand}"
                     Background="TRansparent"/>
-            
+            <Label Text="{Binding GameInfo.Time}" TextColor="White" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Start"/>
         </Grid>        
         <!--endregion-->
     </Grid>

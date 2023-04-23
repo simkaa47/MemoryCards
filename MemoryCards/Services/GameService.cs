@@ -7,38 +7,38 @@ namespace MemoryCards.Services
         private bool isBusy;
         public GameService() { }
 
-        public async Task OnChangeSelectionCard(IEnumerable<MemoryCard> cards, MemoryCard selectedCard)
+        public async Task OnChangeSelectionCard(GameInfo game)
         {
             if (isBusy)
                 return;
 
             
 
-            if (selectedCard is null)
+            if (game.SelectedCard is null)
                 return;
 
-            if (selectedCard.State == CardState.Opened || selectedCard.State == CardState.WaitForPair)
+            if (game.SelectedCard.State == CardState.Opened || game.SelectedCard.State == CardState.WaitForPair)
                 return;
 
-            var waitedCard = GetWaitedCard(cards);
+            var waitedCard = GetWaitedCard(game.GameCards);
 
             if(waitedCard is null)
             {
-                selectedCard.State = CardState.WaitForPair;
+                game.SelectedCard.State = CardState.WaitForPair;
                 return;
             }
-            else if(waitedCard.Name == selectedCard.Name)
+            else if(waitedCard.Name == game.SelectedCard.Name)
             {
                 waitedCard.State = CardState.Opened;
-                selectedCard.State = CardState.Opened;
+                game.SelectedCard.State = CardState.Opened;
                 return;
             }
             else
             {
                 isBusy = true;
-                selectedCard.State = CardState.Opened;
+                game.SelectedCard.State = CardState.Opened;
                 await Task.Delay(500);
-                selectedCard.State = CardState.Closed;
+                game.SelectedCard.State = CardState.Closed;
                 waitedCard.State = CardState.Closed;
             }
 
@@ -51,5 +51,6 @@ namespace MemoryCards.Services
         {
             return cards.Where(c=>c.State == CardState.WaitForPair).FirstOrDefault();
         }
+        
     }
 }
