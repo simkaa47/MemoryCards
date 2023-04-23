@@ -75,7 +75,12 @@
         <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
             <Button Command="{Binding StartNewGameCommand}"
                     Background="TRansparent"/>
-            <Label Text="{Binding GameInfo.Time}" TextColor="White" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Start"/>
+            <Label Text="{Binding GameInfo.Time, StringFormat=\{0:mm\\:ss\}}"
+                   IsVisible="{Binding GameInfo.IsProcessing}"
+                   TextColor="White" 
+                   Grid.Column="1" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Start"/>
         </Grid>        
         <!--endregion-->
     </Grid>
