@@ -10,9 +10,7 @@ namespace MemoryCards.Services
         public async Task OnChangeSelectionCard(GameInfo game)
         {
             if (isBusy)
-                return;
-
-            
+                return;            
 
             if (game.SelectedCard is null)
                 return;
@@ -31,10 +29,15 @@ namespace MemoryCards.Services
             {
                 waitedCard.State = CardState.Opened;
                 game.SelectedCard.State = CardState.Opened;
+                game.Serial++;
+                var points = 60 - game.Time.TotalSeconds;
+                points = points > 0 ? points : 1;
+                game.Points += (int)(points * Math.Pow(2, game.Serial-1));
                 return;
             }
             else
             {
+                game.Serial = 0;
                 isBusy = true;
                 game.SelectedCard.State = CardState.Opened;
                 await Task.Delay(500);
