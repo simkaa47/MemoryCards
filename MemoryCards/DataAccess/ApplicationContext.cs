@@ -1,12 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MemoryCards.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MemoryCards.DataAccess
 {
     public class ApplicationContext:DbContext
     {
+        public DbSet<GameCommonSettings> GameCommonSettings { get; set; } = null!;
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .UseLazyLoadingProxies()        // подключение lazy loading
+                .UseSqlite("Data Source=app.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
