@@ -22,6 +22,9 @@ public partial class GameViewModel : PropertyChangedBase
         _gameService = gameService;
     }
 
+    public int RowsCount { get; set; } = 4;
+    public int ColumnsCount { get; set; } = 3;
+
 
     [RelayCommand]
     async Task StartNewGame()
