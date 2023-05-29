@@ -10,7 +10,7 @@ namespace MemoryCards.DbMigrator
 
             using (var context = new ApplicationContext())
             {
-                var all = context.GameCommonSettingses.ToList();
+                //var all = context.GameCommonSettingses.ToList();
             }
         }
     }

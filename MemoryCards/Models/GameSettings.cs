@@ -6,7 +6,8 @@ namespace MemoryCards.Models
     {
         [ObservableProperty]
         private GameMode _mode;
-
+        [ObservableProperty]
+        CardsNumberInfo _cardsNumberInfo;
         
     }
 

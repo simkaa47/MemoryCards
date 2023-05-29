@@ -29,6 +29,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<GetCardsService>();
         builder.Services.AddSingleton<GameService>();
         builder.Services.AddSingleton<GameViewModel>();
+        builder.Services.AddSingleton<GameSettingsViewModel>();
         builder.Services.AddTransient<ApplicationContext>((services) =>
         {
             return new ApplicationContext(Path.Combine(FileSystem.AppDataDirectory, "app.db3"));

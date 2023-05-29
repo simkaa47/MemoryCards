@@ -16,14 +16,16 @@ public partial class GameViewModel : PropertyChangedBase
     [ObservableProperty]
     private GameInfo _gameInfo;
 
-    public GameViewModel(GetCardsService getCardsService, GameService gameService)
+    public GameSettingsViewModel GameSettingsViewModel { get; }
+
+    public GameViewModel(GetCardsService getCardsService, GameService gameService, GameSettingsViewModel gameSettingsViewModel)
     {
         _getCardsService = getCardsService;
         _gameService = gameService;
+        GameSettingsViewModel = gameSettingsViewModel;
     }
 
-    public int RowsCount { get; set; } = 4;
-    public int ColumnsCount { get; set; } = 3;
+    
 
 
     [RelayCommand]
@@ -37,7 +39,10 @@ public partial class GameViewModel : PropertyChangedBase
         {
             GameInfo = new GameInfo();
             InitTimer();
-            var cards = await _getCardsService.GetCards();
+            var cnt = GameSettingsViewModel.GameSettings.CardsNumberInfo.ColumnsNum * GameSettingsViewModel.GameSettings.CardsNumberInfo.RowsNum;
+            var uniqCards = await _getCardsService.GetCards();
+            var repeats = cnt/2 % uniqCards.Count == 0 ? cnt/2 / uniqCards.Count : cnt/2 / uniqCards.Count + 1;
+            var cards = Enumerable.Range(0, repeats).SelectMany(i => uniqCards).Take(cnt/2);
             var mixed = cards.SelectMany(c => Enumerable.Range(0, 2)
             .Select(i => c.Clone() as MemoryCard))
             .ToList();

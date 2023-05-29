@@ -24,53 +24,56 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+            <Style TargetType="Image">
+                <Style.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.Closed}">
+                        <Setter Property="Source" Value="closed_chest.png"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.Opened}">
+                        <Setter Property="Source" Value="{Binding Picture}"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.WaitForPair}">
+                        <Setter Property="Source" Value="{Binding Picture}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </Grid.Resources>        
         <!--region Chests-->
         <Grid RowDefinitions="0.3*,*"
               ColumnDefinitions="*,8*,*">            
 
-            <CollectionView ItemsSource="{Binding GameInfo.GameCards}"
-                            Grid.Row="1"
-                            SelectionMode="Single" 
-                            HorizontalOptions="Center"                            
-                            VerticalOptions="Center"
-                            Grid.Column="1">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Span="3" Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
-    
-                <CollectionView.Resources>
-                    <Style TargetType="Image"> 
-                        <Style.Triggers>
-                            <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.Closed}">
-                                <Setter Property="Source" Value="closed_chest.png"/>
-                            </DataTrigger>
-                            <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.Opened}">
-                                <Setter Property="Source" Value="{Binding Picture}"/>
-                            </DataTrigger>
-                            <DataTrigger TargetType="Image" Binding="{Binding State}" Value="{x:Static m:CardState.WaitForPair}">
-                                <Setter Property="Source" Value="{Binding Picture}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </CollectionView.Resources>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:MemoryCard">
-                        <Grid>                            
-                            <Image Margin="2" Aspect="Fill" >
+            <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding GameInfo.GameCards}"  Margin="2" Grid.Row="1" Grid.Column="1"
+                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AlignContent="SpaceAround">
 
-                            </Image>
-                            <Button Background="TRansparent"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameViewModel}}, Path=SelectCardCommand}"
-                                    CommandParameter="{Binding}"/>                            
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="m:MemoryCard">
+                    <Grid>
+                        <Grid.HeightRequest>
+                            <MultiBinding Converter="{StaticResource DivideConverter}">
+                                <Binding Source="{RelativeSource AncestorType={x:Type FlexLayout}}" Path="Height"/>
+                                <Binding Source="{RelativeSource AncestorType={x:Type vm:GameViewModel}}" Path="GameSettingsViewModel.GameSettings.CardsNumberInfo.RowsNum"/>
+                            </MultiBinding>
+                        </Grid.HeightRequest>
+                        <Grid.WidthRequest>
+                            <MultiBinding Converter="{StaticResource DivideConverter}">
+                                <Binding Source="{RelativeSource AncestorType={x:Type FlexLayout}}" Path="Width"/>
+                                <Binding Source="{RelativeSource AncestorType={x:Type vm:GameViewModel}}" Path="GameSettingsViewModel.GameSettings.CardsNumberInfo.ColumnsNum"/>
+                            </MultiBinding>
+                        </Grid.WidthRequest>
+                            <Button Background="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameViewModel}}, Path=SelectCardCommand}"
+                                    CommandParameter="{Binding}">
+                                
+                            </Button>
+                        <Image Source="{Binding Picture}" Aspect="AspectFit" Margin="2"/>
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
         </Grid>
         
-
         <!--endregion-->
+        
         <!--region Buttons Panel-->
         <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
             <Button Command="{Binding StartNewGameCommand}"
@@ -88,9 +91,25 @@
             </VerticalStackLayout>
         </Grid>        
        <!--endregion-->
+        <!--#region Settings -->
+        <Picker HorizontalOptions="Center" 
+                VerticalOptions="Start"
+                ItemsSource="{Binding GameSettingsViewModel.CardsNumbers}"                
+                SelectedIndex="0"
+                Background="White"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding GameSettingsViewModel.GameSettings.CardsNumberInfo}"
+                WidthRequest="200" 
+                Margin="20">
+            
+        </Picker>
+        <!--#endregion-->
+
     </Grid>
 
+
     
-    
+
+
 
 </ContentPage>

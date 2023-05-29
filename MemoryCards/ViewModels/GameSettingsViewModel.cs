@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MemoryCards.Models;
+using MemoryCards.Services;
 
 namespace MemoryCards.ViewModels
 {
-    class GameSettingsViewModel
+    public partial class GameSettingsViewModel:PropertyChangedBase 
     {
+        public GameSettings GameSettings { get; } = new GameSettings();
+        
+        public List<CardsNumberInfo> CardsNumbers => GetCardsNumbers.GetNumbers();
     }
 }

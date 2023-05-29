@@ -6,7 +6,7 @@ namespace MemoryCards.Persistance.Services
     public class ApplicationContext:DbContext
     {
         #region Tables
-        public DbSet<GameCommonSettings> GameCommonSettingses { get; set; }
+        
         #endregion
 
         #region Constructors
